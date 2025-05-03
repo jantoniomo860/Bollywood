@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurante Bollywood</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#FF1493',secondary:'#FFD700'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Merriweather', serif;
+}
+.font-lobster {
+font-family: 'Lobster Two', cursive;
+}
+.temple-arch {
+clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 70% 85%, 55% 100%, 40% 85%, 25% 100%, 10% 85%, 0 100%);
+}
+.menu-item:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.tab-content {
+display: none;
+}
+.tab-content.active {
+display: block;
+animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.custom-checkbox {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #FFD700;
+border-radius: 4px;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+.custom-checkbox:checked {
+background-color: #FF1493;
+border-color: #FF1493;
+}
+.custom-checkbox:checked::after {
+content: '';
+position: absolute;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.language-switch input[type="radio"] {
+display: none;
+}
+.language-switch label {
+cursor: pointer;
+padding: 0.5rem 1rem;
+border-radius: 9999px;
+transition: all 0.3s ease;
+}
+.language-switch input[type="radio"]:checked + label {
+background-color: #FF1493;
+color: white;
+}
+.menu-tabs input[type="radio"] {
+display: none;
+}
+.menu-tabs label {
+cursor: pointer;
+padding: 0.75rem 1.5rem;
+border-radius: 9999px;
+transition: all 0.3s ease;
+border: 2px solid transparent;
+}
+.menu-tabs input[type="radio"]:checked + label {
+background-color: #FF1493;
+color: white;
+border-color: #FFD700;
+}
+.submenu-tabs input[type="radio"] {
+display: none;
+}
+.submenu-tabs label {
+cursor: pointer;
+padding: 0.5rem 1rem;
+border-radius: 9999px;
+transition: all 0.3s ease;
+border: 1px solid transparent;
+}
+.submenu-tabs input[type="radio"]:checked + label {
+background-color: #4B0082;
+color: white;
+border-color: #FFD700;
+}
+.mandala-decoration {
+background-image: url("https://readdy.ai/api/search-image?query=elegant%2520indian%2520mandala%2520pattern%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520intricate%2520geometric%2520floral%2520design%2C%2520symmetrical%2520circular%2520pattern%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=400&height=400&seq=mandala1&orientation=squarish");
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+opacity: 0.15;
+position: absolute;
+z-index: -1;
+}
+.mobile-menu {
+transform: translateX(-100%);
+transition: transform 0.3s ease-in-out;
+}
+.mobile-menu.open {
+transform: translateX(0);
+}
+.hamburger span {
+display: block;
+width: 25px;
+height: 3px;
+background-color: #FFD700;
+margin: 5px 0;
+transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) {
+transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+transform: rotate(-45deg) translate(7px, -7px);
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header con arco de templo -->
+<header class="fixed top-0 left-0 w-full z-50">
+<div class="temple-arch bg-gradient-to-r from-[#4B0082] via-[#1A1A1A] to-[#4B0082] shadow-lg">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<div class="w-10 h-10 md:hidden flex items-center justify-center hamburger" id="hamburger-btn">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<nav class="hidden md:flex items-center space-x-6">
+<a href="#inicio" class="text-white hover:text-secondary transition-all duration-300">Inicio</a>
+<a href="#nosotros" class="text-white hover:text-secondary transition-all duration-300">Sobre Nosotros</a>
+<a href="#menu" class="text-white hover:text-secondary transition-all duration-300">Menú</a>
+</nav>
+<div class="flex items-center">
+<h1 class="font-['Pacifico'] text-2xl md:text-3xl text-secondary">Bollywood</h1>
+<div class="w-8 h-8 ml-2 flex items-center justify-center">
+<i class="ri-restaurant-2-fill text-secondary ri-lg"></i>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<nav class="hidden md:flex items-center space-x-6">
+<a href="#galeria" class="text-white hover:text-secondary transition-all duration-300">Galería</a>
+<a href="#contacto" class="text-white hover:text-secondary transition-all duration-300">Contacto</a>
+</nav>
+<div class="language-switch flex bg-black/30 rounded-full p-1">
+<input type="radio" name="language" id="es" checked>
+<label for="es" class="text-white text-sm whitespace-nowrap">ES</label>
+<input type="radio" name="language" id="en">
+<label for="en" class="text-white text-sm whitespace-nowrap">EN</label>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Menú móvil -->
+<div class="mobile-menu fixed top-0 left-0 h-full w-64 bg-[#1A1A1A] z-40 shadow-2xl pt-20 px-4">
+<nav class="flex flex-col space-y-4">
+<a href="#inicio" class="text-white hover:text-secondary transition-all duration-300 py-2 border-b border-gray-700">Inicio</a>
+<a href="#nosotros" class="text-white hover:text-secondary transition-all duration-300 py-2 border-b border-gray-700">Sobre Nosotros</a>
+<a href="#menu" class="text-white hover:text-secondary transition-all duration-300 py-2 border-b border-gray-700">Menú</a>
+<a href="#galeria" class="text-white hover:text-secondary transition-all duration-300 py-2 border-b border-gray-700">Galería</a>
+<a href="#contacto" class="text-white hover:text-secondary transition-all duration-300 py-2 border-b border-gray-700">Contacto</a>
+</nav>
+</div>
+<!-- Hero Section -->
+<section id="inicio" class="relative min-h-screen flex items-center justify-center pt-20" style="background-image: url('https://readdy.ai/api/search-image?query=authentic%2520indian%2520restaurant%2520interior%2520with%2520warm%2520ambient%2520lighting%2C%2520colorful%2520decorations%2C%2520traditional%2520ornaments%2C%2520elegant%2520table%2520settings%2520with%2520authentic%2520indian%2520cuisine%2C%2520atmospheric%2520mood%2C%2520rich%2520colors%2C%2520professional%2520food%2520photography%2C%2520cinematic%2520lighting&width=1920&height=1080&seq=hero1&orientation=landscape'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-black/50"></div>
+<div class="container mx-auto px-4 z-10">
+<div class="max-w-3xl mx-auto text-center">
+<h1 class="font-lobster text-5xl md:text-7xl text-white mb-4 animate-fadeIn" style="text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">Sabores Auténticos de la India</h1>
+<p class="text-white/90 text-lg md:text-xl mb-8 animate-fadeIn">Una experiencia culinaria que despierta todos tus sentidos</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+<a href="#reservar" class="bg-primary border-2 border-secondary text-white py-3 px-8 rounded-button font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg whitespace-nowrap">Reservar Mesa</a>
+<a href="#menu" class="bg-secondary border-2 border-primary text-[#1A1A1A] py-3 px-8 rounded-button font-semibold hover:bg-secondary/90 transition-all duration-300 shadow-lg whitespace-nowrap">Ver Menú</a>
+</div>
+</div>
+</div>
+<!-- Decoración floral en esquinas -->
+<div class="absolute top-32 left-8 w-24 h-24 opacity-70 hidden md:block">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520indian%2520floral%2520corner%2520decoration%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=200&height=200&seq=corner1&orientation=squarish" alt="Decoración" class="w-full h-full object-contain">
+</div>
+<div class="absolute bottom-32 right-8 w-24 h-24 opacity-70 hidden md:block">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520indian%2520floral%2520corner%2520decoration%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=200&height=200&seq=corner2&orientation=squarish" alt="Decoración" class="w-full h-full object-contain transform rotate-180">
+</div>
+</section>
+<!-- Sobre Nosotros -->
+<section id="nosotros" class="py-20 relative overflow-hidden">
+<div class="mandala-decoration w-full h-full"></div>
+<div class="container mx-auto px-4">
+<h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-12">Nuestra Historia</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="relative">
+<div class="absolute -top-4 -left-4 w-full h-full border-2 border-secondary rounded"></div>
+<img src="https://readdy.ai/api/search-image?query=professional%2520indian%2520chef%2520team%2520in%2520elegant%2520restaurant%2520kitchen%2C%2520preparing%2520authentic%2520dishes%2C%2520wearing%2520traditional%2520attire%2520with%2520modern%2520chef%2520elements%2C%2520warm%2520lighting%2C%2520cinematic%2520composition%2C%2520high-end%2520restaurant%2520photography&width=600&height=800&seq=chef1&orientation=portrait" alt="Nuestro equipo" class="w-full h-full object-cover rounded shadow-lg relative z-10">
+<div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-primary rounded"></div>
+</div>
+<div class="space-y-6">
+<p class="text-gray-800">Desde 2010, <span class="font-semibold text-[#4B0082]">Restaurante Bollywood</span> ha traído los auténticos sabores de la India a Madrid. Nuestro viaje comenzó con la pasión del Chef Rajesh Sharma por compartir las recetas tradicionales de su familia.</p>
+<div class="flex justify-center my-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520indian%2520ornamental%2520divider%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=400&height=50&seq=divider1&orientation=landscape" alt="Separador" class="h-6 object-contain">
+</div>
+<p class="text-gray-800">Cada plato que servimos es una celebración de la rica herencia culinaria india, preparado con ingredientes frescos y especias importadas directamente de las regiones más emblemáticas de la India.</p>
+<div class="flex justify-center my-4">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520indian%2520ornamental%2520divider%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=400&height=50&seq=divider2&orientation=landscape" alt="Separador" class="h-6 object-contain">
+</div>
+<p class="text-gray-800">Nuestro objetivo es ofrecerte una experiencia gastronómica inolvidable que despierte todos tus sentidos y te transporte a las calles de Mumbai, Delhi y Jaipur sin salir de Madrid.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Menú -->
+<section id="menu" class="py-20 bg-gradient-to-b from-white to-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-12">Nuestro Menú</h2>
+<!-- Tabs principales -->
+<div class="menu-tabs flex flex-wrap justify-center gap-2 mb-8">
+<input type="radio" name="menu-tab" id="tab-diario" checked>
+<label for="tab-diario" class="font-lobster text-lg !rounded-button">Menú Diario</label>
+<input type="radio" name="menu-tab" id="tab-grupos">
+<label for="tab-grupos" class="font-lobster text-lg !rounded-button">Menú para Grupos</label>
+<input type="radio" name="menu-tab" id="tab-ensaladas">
+<label for="tab-ensaladas" class="font-lobster text-lg !rounded-button">Ensaladas</label>
+<input type="radio" name="menu-tab" id="tab-sopas">
+<label for="tab-sopas" class="font-lobster text-lg !rounded-button">Sopas</label>
+<input type="radio" name="menu-tab" id="tab-entrantes">
+<label for="tab-entrantes" class="font-lobster text-lg !rounded-button">Entrantes</label>
+<input type="radio" name="menu-tab" id="tab-tandoor">
+<label for="tab-tandoor" class="font-lobster text-lg !rounded-button">Tandoor Ki Mahak</label>
+<input type="radio" name="menu-tab" id="tab-principal">
+<label for="tab-principal" class="font-lobster text-lg !rounded-button">Plato Principal</label>
+</div>
+<!-- Contenido de las tabs -->
+<div class="tab-content active" id="content-diario">
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+<h3 class="font-lobster text-3xl text-primary mb-6 text-center">Menú Diario</h3>
+<p class="text-center text-gray-700 mb-8">Disponible de lunes a viernes de 13:00 a 16:00h</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Menú Ejecutivo</h4>
+<p class="text-gray-600 italic mb-4">Incluye entrante, plato principal, postre y bebida</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Opción Vegetariana</span>
+<span class="font-semibold text-primary">14,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Opción con Pollo</span>
+<span class="font-semibold text-primary">16,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Opción con Cordero</span>
+<span class="font-semibold text-primary">18,95 €</span>
+</li>
+</ul>
+</div>
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Menú Bollywood</h4>
+<p class="text-gray-600 italic mb-4">Incluye 2 entrantes, plato principal, naan, postre y bebida</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Opción Vegetariana</span>
+<span class="font-semibold text-primary">18,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Opción con Pollo</span>
+<span class="font-semibold text-primary">21,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Opción con Cordero</span>
+<span class="font-semibold text-primary">24,95 €</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="content-grupos">
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+<h3 class="font-lobster text-3xl text-primary mb-6 text-center">Menú para Grupos</h3>
+<!-- Subtabs para grupos -->
+<div class="submenu-tabs flex justify-center gap-4 mb-8">
+<input type="radio" name="grupo-tab" id="grupo-2" checked>
+<label for="grupo-2" class="!rounded-button">2 Personas</label>
+<input type="radio" name="grupo-tab" id="grupo-4">
+<label for="grupo-4" class="!rounded-button">4 Personas</label>
+<input type="radio" name="grupo-tab" id="grupo-6">
+<label for="grupo-6" class="!rounded-button">6 Personas</label>
+</div>
+<div class="grupo-content active" id="content-grupo-2">
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Menú Taj Mahal para 2</h4>
+<p class="text-gray-600 italic mb-4">Una selección de nuestros mejores platos para compartir</p>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="font-semibold mr-2">Entrantes:</span>
+<span>2 Samosas, Pakoras variadas y Chicken Tikka</span>
+</li>
+<li class="flex items-start">
+<span class="font-semibold mr-2">Principales:</span>
+<span>Butter Chicken, Lamb Rogan Josh, Arroz Basmati y 2 Naan</span>
+</li>
+<li class="flex items-start">
+<span class="font-semibold mr-2">Postres:</span>
+<span>2 Gulab Jamun o Kulfi</span>
+</li>
+<li class="flex justify-between mt-4">
+<span class="font-semibold">Precio total</span>
+<span class="font-semibold text-primary text-xl">49,95 €</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="content-principal">
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+<h3 class="font-lobster text-3xl text-primary mb-6 text-center">Platos Principales</h3>
+<p class="text-center text-gray-700 mb-8">Todos nuestros platos principales se sirven con arroz basmati</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Curry Clásico</h4>
+<p class="text-gray-600 italic mb-4">Preparado con nuestra mezcla secreta de especias en salsa tradicional</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Verduras</span>
+<span class="font-semibold text-primary">14,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Pollo</span>
+<span class="font-semibold text-primary">16,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Cordero</span>
+<span class="font-semibold text-primary">18,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Gambas</span>
+<span class="font-semibold text-primary">19,95 €</span>
+</li>
+</ul>
+</div>
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Butter Masala</h4>
+<p class="text-gray-600 italic mb-4">Cremosa salsa de tomate con mantequilla, nata y especias aromáticas</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Paneer (queso indio)</span>
+<span class="font-semibold text-primary">15,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Pollo</span>
+<span class="font-semibold text-primary">17,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Cordero</span>
+<span class="font-semibold text-primary">19,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Gambas</span>
+<span class="font-semibold text-primary">21,95 €</span>
+</li>
+</ul>
+</div>
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Korma</h4>
+<p class="text-gray-600 italic mb-4">Suave y aromática salsa con nata, coco y frutos secos</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Verduras</span>
+<span class="font-semibold text-primary">15,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Pollo</span>
+<span class="font-semibold text-primary">17,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Cordero</span>
+<span class="font-semibold text-primary">19,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Gambas</span>
+<span class="font-semibold text-primary">21,95 €</span>
+</li>
+</ul>
+</div>
+<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
+<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Vindaloo</h4>
+<p class="text-gray-600 italic mb-4">Intenso y picante, con vinagre, ajo y especias de Goa</p>
+<ul class="space-y-2">
+<li class="flex justify-between">
+<span>Verduras</span>
+<span class="font-semibold text-primary">15,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Pollo</span>
+<span class="font-semibold text-primary">17,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Cordero</span>
+<span class="font-semibold text-primary">19,95 €</span>
+</li>
+<li class="flex justify-between">
+<span>Gambas</span>
+<span class="font-semibold text-primary">21,95 €</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Galería -->
+<section id="galeria" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-12">Nuestra Galería</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food1&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Butter Chicken</p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food2&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Samosas</p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill%2520with%2520chicken%2C%2520lamb%2520and%2520vegetables%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food3&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Tandoori Mix</p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520biryani%2520rice%2520with%2520raita%2520and%2520garnishes%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food4&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Biryani</p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520naan%2520bread%2520selection%2520with%2520different%2520flavors%2520and%2520toppings%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food5&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Naan Variado</p>
+</div>
+</div>
+<div class="relative overflow-hidden rounded-lg shadow-lg group">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520indian%2520dessert%2520selection%2520with%2520gulab%2520jamun%2520and%2520kulfi%2C%2520authentic%2520indian%2520cuisine%2C%2520professional%2520food%2520photography%2C%2520warm%2520lighting%2C%2520restaurant%2520quality%2520presentation&width=600&height=400&seq=food6&orientation=landscape" alt="Plato indio" class="w-full h-64 object-cover object-top transition-transform duration-500 group-hover:scale-110">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+<p class="text-white p-4 font-lobster text-xl">Postres Tradicionales</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contacto -->
+<section id="contacto" class="py-20 bg-gradient-to-b from-gray-50 to-white relative">
+<div class="mandala-decoration w-full h-full"></div>
+<div class="container mx-auto px-4 relative z-10">
+<h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-12">Contacto</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div>
+<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
+<h3 class="font-lobster text-2xl text-primary mb-6">Información de Contacto</h3>
+<div class="space-y-4">
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-secondary">
+<i class="ri-map-pin-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h4 class="font-semibold text-[#4B0082]">Dirección</h4>
+<p class="text-gray-700">Calle Gran Vía 123, 28013 Madrid</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-secondary">
+<i class="ri-phone-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h4 class="font-semibold text-[#4B0082]">Teléfono</h4>
+<p class="text-gray-700">+34 912 345 678</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex items-center justify-center text-secondary">
+<i class="ri-mail-line ri-lg"></i>
+</div>
+<div class="ml-4">
+<h4 class="font-semibold text-[#4B0082]">Email</h4>
+<p class="text-gray-700">info@restaurantebollywood.es</p>
+</div>
+</div>
+</div>
+<h3 class="font-lobster text-2xl text-primary mt-8 mb-4">Horario</h3>
+<div class="bg-gray-50 rounded p-4">
+<div class="grid grid-cols-2 gap-2">
+<div class="font-semibold">Lunes - Jueves:</div>
+<div>13:00 - 16:00, 20:00 - 23:30</div>
+<div class="font-semibold">Viernes - Sábado:</div>
+<div>13:00 - 16:00, 20:00 - 00:30</div>
+<div class="font-semibold">Domingo:</div>
+<div>13:00 - 16:00, 20:00 - 23:00</div>
+</div>
+</div>
+<div class="mt-8">
+<a href="#reservar" class="inline-block bg-primary text-white py-3 px-6 rounded-button font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md whitespace-nowrap">Reservar Mesa</a>
+</div>
+</div>
+</div>
+<div>
+<div class="bg-white rounded-lg shadow-lg overflow-hidden h-full">
+<div class="h-full min-h-[400px] bg-gray-200" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Botón de WhatsApp flotante -->
+<a href="https://wa.me/34912345678" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-all duration-300 z-20">
+<div class="w-8 h-8 flex items-center justify-center text-white">
+<i class="ri-whatsapp-fill ri-xl"></i>
+</div>
+</a>
+</section>
+<!-- Reserva -->
+<section id="reservar" class="py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-12">Reserva tu Mesa</h2>
+<div class="max-w-2xl mx-auto">
+<form class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="nombre" class="block text-gray-700 mb-2">Nombre</label>
+<input type="text" id="nombre" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div>
+<label for="telefono" class="block text-gray-700 mb-2">Teléfono</label>
+<input type="tel" id="telefono" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div>
+<label for="email" class="block text-gray-700 mb-2">Email</label>
+<input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div>
+<label for="personas" class="block text-gray-700 mb-2">Número de Personas</label>
+<input type="number" id="personas" min="1" max="20" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div>
+<label for="fecha" class="block text-gray-700 mb-2">Fecha</label>
+<input type="date" id="fecha" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div>
+<label for="hora" class="block text-gray-700 mb-2">Hora</label>
+<input type="time" id="hora" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+<div class="md:col-span-2">
+<label for="mensaje" class="block text-gray-700 mb-2">Mensaje (opcional)</label>
+<textarea id="mensaje" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+</div>
+</div>
+<div class="mt-6 flex items-start">
+<input type="checkbox" id="terminos" class="custom-checkbox" required>
+<label for="terminos" class="ml-3 text-sm text-gray-700">Acepto la política de privacidad y el tratamiento de mis datos personales</label>
+</div>
+<div class="mt-8 text-center">
+<button type="submit" class="bg-primary border-2 border-secondary text-white py-3 px-8 rounded-button font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg whitespace-nowrap">Confirmar Reserva</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gradient-to-b from-[#1A1A1A] to-[#4B0082] text-white pt-16 pb-8 relative">
+<div class="absolute top-0 left-0 w-full overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=elegant%2520indian%2520henna%2520pattern%2520border%2520with%2520gold%2520and%2520fuchsia%2520details%2520on%2520transparent%2520background%2C%2520ornate%2520decorative%2520elements%2C%2520high%2520detail%2C%2520digital%2520art&width=1920&height=100&seq=footer1&orientation=landscape" alt="Decoración" class="w-full h-12 object-cover">
+</div>
+<div class="container mx-auto px-4 pt-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<div class="flex items-center mb-6">
+<h3 class="font-['Pacifico'] text-3xl text-secondary">Bollywood</h3>
+<div class="w-8 h-8 ml-2 flex items-center justify-center">
+<i class="ri-restaurant-2-fill text-secondary ri-lg"></i>
+</div>
+</div>
+<p class="text-gray-300 mb-6">Auténtica cocina india en el corazón de Madrid. Una experiencia gastronómica que despierta todos tus sentidos.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1A1A1A] transition-all duration-300">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1A1A1A] transition-all duration-300">
+<i class="ri-instagram-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-[#1A1A1A] transition-all duration-300">
+<i class="ri-twitter-x-fill"></i>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-xl font-semibold mb-6">Enlaces Rápidos</h4>
+<ul class="space-y-3">
+<li><a href="#inicio" class="text-gray-300 hover:text-secondary transition-all duration-300">Inicio</a></li>
+<li><a href="#nosotros" class="text-gray-300 hover:text-secondary transition-all duration-300">Sobre Nosotros</a></li>
+<li><a href="#menu" class="text-gray-300 hover:text-secondary transition-all duration-300">Menú</a></li>
+<li><a href="#galeria" class="text-gray-300 hover:text-secondary transition-all duration-300">Galería</a></li>
+<li><a href="#contacto" class="text-gray-300 hover:text-secondary transition-all duration-300">Contacto</a></li>
+<li><a href="#reservar" class="text-gray-300 hover:text-secondary transition-all duration-300">Reservas</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xl font-semibold mb-6">Contacto</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-secondary mr-3">
+<i class="ri-map-pin-line"></i>
+</div>
+<span class="text-gray-300">Calle Gran Vía 123, 28013 Madrid</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-secondary mr-3">
+<i class="ri-phone-line"></i>
+</div>
+<span class="text-gray-300">+34 912 345 678</span>
+</li>
+<li class="flex items-start">
+<div class="w-6 h-6 flex items-center justify-center text-secondary mr-3">
+<i class="ri-mail-line"></i>
+</div>
+<span class="text-gray-300">info@restaurantebollywood.es</span>
+</li>
+</ul>
+<div class="mt-6 flex items-center space-x-4">
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-visa-fill text-white ri-lg"></i>
+</div>
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-mastercard-fill text-white ri-lg"></i>
+</div>
+<div class="w-10 h-6 flex items-center justify-center">
+<i class="ri-paypal-fill text-white ri-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-white/20 mt-12 pt-8 text-center">
+<p class="text-gray-400 text-sm">© 2025 Restaurante Bollywood. Todos los derechos reservados.</p>
+</div>
+</div>
+</footer>
+<script>
+const translations = {
+  es: {
+    inicio: "Inicio",
+    nosotros: "Sobre Nosotros",
+    menu: "Menú",
+    galeria: "Galería", 
+    contacto: "Contacto",
+    heroTitle: "Sabores Auténticos de la India",
+    heroSubtitle: "Una experiencia culinaria que despierta todos tus sentidos",
+    reservar: "Reservar Mesa",
+    verMenu: "Ver Menú",
+    historia: "Nuestra Historia",
+    historiaP1: "Desde 2010, Restaurante Bollywood ha traído los auténticos sabores de la India a Madrid. Nuestro viaje comenzó con la pasión del Chef Rajesh Sharma por compartir las recetas tradicionales de su familia.",
+    historiaP2: "Cada plato que servimos es una celebración de la rica herencia culinaria india, preparado con ingredientes frescos y especias importadas directamente de las regiones más emblemáticas de la India.",
+    historiaP3: "Nuestro objetivo es ofrecerte una experiencia gastronómica inolvidable que despierte todos tus sentidos y te transporte a las calles de Mumbai, Delhi y Jaipur sin salir de Madrid.",
+    nuestroMenu: "Nuestro Menú",
+    menuDiario: "Menú Diario",
+    menuGrupos: "Menú para Grupos",
+    ensaladas: "Ensaladas",
+    sopas: "Sopas",
+    entrantes: "Entrantes",
+    tandoor: "Tandoor Ki Mahak",
+    principal: "Plato Principal",
+    disponible: "Disponible de lunes a viernes de 13:00 a 16:00h",
+    ejecutivo: "Menú Ejecutivo",
+    incluye: "Incluye entrante, plato principal, postre y bebida",
+    vegetariana: "Opción Vegetariana",
+    pollo: "Opción con Pollo",
+    cordero: "Opción con Cordero",
+    menuBollywood: "Menú Bollywood",
+    incluyeEspecial: "Incluye 2 entrantes, plato principal, naan, postre y bebida",
+    personas: "Personas",
+    infoContacto: "Información de Contacto",
+    direccion: "Dirección",
+    telefono: "Teléfono",
+    email: "Email",
+    horario: "Horario",
+    lunesJueves: "Lunes - Jueves",
+    viernesSabado: "Viernes - Sábado",
+    domingo: "Domingo",
+    reservaMesa: "Reserva tu Mesa",
+    nombre: "Nombre",
+    mensaje: "Mensaje (opcional)",
+    terminos: "Acepto la política de privacidad y el tratamiento de mis datos personales",
+    confirmar: "Confirmar Reserva",
+    footer: {
+      experiencia: "Auténtica cocina india en el corazón de Madrid. Una experiencia gastronómica que despierta todos tus sentidos.",
+      enlaces: "Enlaces Rápidos",
+      derechos: "© 2025 Restaurante Bollywood. Todos los derechos reservados."
+    }
+  },
+  en: {
+    inicio: "Home",
+    nosotros: "About Us",
+    menu: "Menu",
+    galeria: "Gallery",
+    contacto: "Contact",
+    heroTitle: "Authentic Indian Flavors",
+    heroSubtitle: "A culinary experience that awakens all your senses",
+    reservar: "Book a Table",
+    verMenu: "View Menu",
+    historia: "Our Story",
+    historiaP1: "Since 2010, Bollywood Restaurant has brought authentic Indian flavors to Madrid. Our journey began with Chef Rajesh Sharma's passion for sharing his family's traditional recipes.",
+    historiaP2: "Every dish we serve is a celebration of India's rich culinary heritage, prepared with fresh ingredients and spices imported directly from India's most iconic regions.",
+    historiaP3: "Our goal is to offer you an unforgettable dining experience that awakens all your senses and transports you to the streets of Mumbai, Delhi, and Jaipur without leaving Madrid.",
+    nuestroMenu: "Our Menu",
+    menuDiario: "Daily Menu",
+    menuGrupos: "Group Menu",
+    ensaladas: "Salads",
+    sopas: "Soups",
+    entrantes: "Starters",
+    tandoor: "Tandoor Ki Mahak",
+    principal: "Main Course",
+    disponible: "Available Monday to Friday from 1:00 PM to 4:00 PM",
+    ejecutivo: "Executive Menu",
+    incluye: "Includes starter, main course, dessert and drink",
+    vegetariana: "Vegetarian Option",
+    pollo: "Chicken Option",
+    cordero: "Lamb Option",
+    menuBollywood: "Bollywood Menu",
+    incluyeEspecial: "Includes 2 starters, main course, naan, dessert and drink",
+    personas: "People",
+    infoContacto: "Contact Information",
+    direccion: "Address",
+    telefono: "Phone",
+    email: "Email",
+    horario: "Opening Hours",
+    lunesJueves: "Monday - Thursday",
+    viernesSabado: "Friday - Saturday",
+    domingo: "Sunday",
+    reservaMesa: "Book Your Table",
+    nombre: "Name",
+    mensaje: "Message (optional)",
+    terminos: "I accept the privacy policy and the processing of my personal data",
+    confirmar: "Confirm Reservation",
+    footer: {
+      experiencia: "Authentic Indian cuisine in the heart of Madrid. A gastronomic experience that awakens all your senses.",
+      enlaces: "Quick Links",
+      derechos: "© 2025 Bollywood Restaurant. All rights reserved."
+    }
+  }
+};
+document.addEventListener('DOMContentLoaded', function() {
+// Menú móvil
+const hamburger = document.getElementById('hamburger-btn');
+const mobileMenu = document.querySelector('.mobile-menu');
+// Language switcher
+const esRadio = document.getElementById('es');
+const enRadio = document.getElementById('en');
+function updateLanguage(lang) {
+  // Update navigation
+  document.querySelectorAll('a[href="#inicio"]').forEach(el => el.textContent = translations[lang].inicio);
+  document.querySelectorAll('a[href="#nosotros"]').forEach(el => el.textContent = translations[lang].nosotros);
+  document.querySelectorAll('a[href="#menu"]').forEach(el => el.textContent = translations[lang].menu);
+  document.querySelectorAll('a[href="#galeria"]').forEach(el => el.textContent = translations[lang].galeria);
+  document.querySelectorAll('a[href="#contacto"]').forEach(el => el.textContent = translations[lang].contacto);
+  
+  // Update hero section
+  document.querySelector('h1.animate-fadeIn').textContent = translations[lang].heroTitle;
+  document.querySelector('p.animate-fadeIn').textContent = translations[lang].heroSubtitle;
+  
+  // Update buttons
+  document.querySelectorAll('a[href="#reservar"]').forEach(el => el.textContent = translations[lang].reservar);
+  document.querySelector('a[href="#menu"].bg-secondary').textContent = translations[lang].verMenu;
+  
+  // Update about section
+  document.querySelector('#nosotros h2').textContent = translations[lang].historia;
+  const aboutParagraphs = document.querySelectorAll('#nosotros .space-y-6 p');
+  aboutParagraphs[0].innerHTML = aboutParagraphs[0].innerHTML.replace(/Desde.*familia\./, translations[lang].historiaP1);
+  aboutParagraphs[1].textContent = translations[lang].historiaP2;
+  aboutParagraphs[2].textContent = translations[lang].historiaP3;
+  
+  // Update menu section
+  document.querySelector('#menu h2').textContent = translations[lang].nuestroMenu;
+  document.querySelector('label[for="tab-diario"]').textContent = translations[lang].menuDiario;
+  document.querySelector('label[for="tab-grupos"]').textContent = translations[lang].menuGrupos;
+  document.querySelector('label[for="tab-ensaladas"]').textContent = translations[lang].ensaladas;
+  document.querySelector('label[for="tab-sopas"]').textContent = translations[lang].sopas;
+  document.querySelector('label[for="tab-entrantes"]').textContent = translations[lang].entrantes;
+  document.querySelector('label[for="tab-tandoor"]').textContent = translations[lang].tandoor;
+  document.querySelector('label[for="tab-principal"]').textContent = translations[lang].principal;
+  
+  // Update contact section
+  document.querySelector('#contacto h2').textContent = translations[lang].contacto;
+  document.querySelector('#contacto h3').textContent = translations[lang].infoContacto;
+  document.querySelector('#contacto h4:nth-of-type(1)').textContent = translations[lang].direccion;
+  document.querySelector('#contacto h4:nth-of-type(2)').textContent = translations[lang].telefono;
+  document.querySelector('#contacto h4:nth-of-type(3)').textContent = translations[lang].email;
+  
+  // Update booking section
+  document.querySelector('#reservar h2').textContent = translations[lang].reservaMesa;
+  document.querySelector('label[for="nombre"]').textContent = translations[lang].nombre;
+  document.querySelector('label[for="telefono"]').textContent = translations[lang].telefono;
+  document.querySelector('label[for="mensaje"]').textContent = translations[lang].mensaje;
+  document.querySelector('label[for="terminos"]').textContent = translations[lang].terminos;
+  document.querySelector('button[type="submit"]').textContent = translations[lang].confirmar;
+  
+  // Update footer
+  document.querySelector('footer p.text-gray-300').textContent = translations[lang].footer.experiencia;
+  document.querySelector('footer h4:first-of-type').textContent = translations[lang].footer.enlaces;
+  document.querySelector('footer p.text-gray-400').textContent = translations[lang].footer.derechos;
+}
+esRadio.addEventListener('change', () => {
+  if(esRadio.checked) {
+    updateLanguage('es');
+  }
+});
+enRadio.addEventListener('change', () => {
+  if(enRadio.checked) {
+    updateLanguage('en');
+  }
+});
+hamburger.addEventListener('click', function() {
+hamburger.classList.toggle('open');
+mobileMenu.classList.toggle('open');
+});
+// Cerrar menú móvil al hacer clic en un enlace
+const mobileLinks = document.querySelectorAll('.mobile-menu a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+hamburger.classList.remove('open');
+mobileMenu.classList.remove('open');
+});
+});
+// Navegación suave
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+window.scrollTo({
+top: target.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
+});
+document.addEventListener('DOMContentLoaded', function() {
+// Tabs del menú
+const menuTabs = document.querySelectorAll('input[name="menu-tab"]');
+const tabContents = document.querySelectorAll('.tab-content');
+menuTabs.forEach(tab => {
+tab.addEventListener('change', function() {
+const tabId = this.id;
+const contentId = 'content-' + tabId.split('-')[1];
+tabContents.forEach(content => {
+content.classList.remove('active');
+});
+document.getElementById(contentId).classList.add('active');
+});
+});
+// Subtabs para grupos
+const grupoTabs = document.querySelectorAll('input[name="grupo-tab"]');
+const grupoContents = document.querySelectorAll('.grupo-content');
+grupoTabs.forEach(tab => {
+tab.addEventListener('change', function() {
+const tabId = this.id;
+const contentId = 'content-' + tabId;
+grupoContents.forEach(content => {
+content.classList.remove('active');
+});
+document.getElementById(contentId).classList.add('active');
+});
+});
+});
+</script>
+</body>
+</html>
