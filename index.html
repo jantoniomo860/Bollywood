@@ -314,49 +314,51 @@ transform: rotate(-45deg) translate(7px, -7px);
   </div>
 </div>
 <div class="tab-content" id="content-grupos">
-  <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200 max-w-3xl mx-auto text-center text-[#1A1A1A] leading-relaxed space-y-10 font-['Merriweather']">
-    <!-- Menú para 2 personas -->
-    <div>
-      <h2 class="text-2xl font-bold uppercase">MENÚ PARA 2 PERSONAS <span class="text-lg font-normal">42,00€</span><br><span class="text-base italic font-medium text-gray-600">MENU FOR 2 PEOPLE</span></h2>
-      <ul class="mt-4 space-y-1 text-left list-disc list-inside">
-        <li>Una porción de pollo tikka, una porción de verduras samosa<br><span class="text-sm text-gray-500">One portion of chicken tikka, one portion of vegetable samosa</span></li>
-        <li>A elegir dos platos principales: Pollo, cordero, pescado o gamba<br><span class="text-sm text-gray-500">Choice of two main dishes: Chicken, lamb, fish or prawn</span></li>
-        <li>A elegir un plato de verduras<br><span class="text-sm text-gray-500">Choice of one vegetable dish</span></li>
-        <li>A elegir un Naan<br><span class="text-sm text-gray-500">Choice of one naan</span></li>
-        <li>A elegir un arroz<br><span class="text-sm text-gray-500">Choice of one rice</span></li>
-        <li>Una botella de vino de la casa (tinto, blanco o rosado) o dos pintas de cerveza<br><span class="text-sm text-gray-500">One bottle of house wine (red, white or rosé) or two pints of beer</span></li>
-      </ul>
+  <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200 max-w-3xl mx-auto text-[#1A1A1A] leading-relaxed font-['Merriweather']">
+
+    <!-- Botones de personas -->
+    <div class="flex justify-center space-x-4 mb-8">
+      <button class="group-btn px-6 py-2 bg-purple-800 text-white rounded-full font-semibold shadow hover:bg-purple-700" onclick="mostrarMenu('menu2')">2 Personas</button>
+      <button class="group-btn px-6 py-2 bg-purple-800 text-white rounded-full font-semibold shadow hover:bg-purple-700" onclick="mostrarMenu('menu4')">4 Personas</button>
+      <button class="group-btn px-6 py-2 bg-purple-800 text-white rounded-full font-semibold shadow hover:bg-purple-700" onclick="mostrarMenu('menu6')">6 Personas</button>
     </div>
-  <!-- Menú para 4 personas -->
-    <div>
-      <h2 class="text-2xl font-bold uppercase">MENÚ PARA 4 PERSONAS <span class="text-lg font-normal">85,00€</span><br><span class="text-base italic font-medium text-gray-600">MENU FOR 4 PEOPLE</span></h2>
-      <ul class="mt-4 space-y-1 text-left list-disc list-inside">
-        <li>Cuatro Papadoms<br><span class="text-sm text-gray-500">Four Papadoms</span></li>
-        <li>Cuatro piezas de Pollo Tikka, cuatro de Pollo Tikka con Menta<br><span class="text-sm text-gray-500">Four pieces of Chicken Tikka, four of Mint Chicken Tikka</span></li>
-        <li>Cuatro piezas de Cebolla Bhaji, cuatro de queso Paneer Pakoba<br><span class="text-sm text-gray-500">Four Onion Bhaji, four Paneer Pakoba cheese</span></li>
-        <li>A elegir cuatro platos principales: Pollo, Cordero, Pescado o Gamba<br><span class="text-sm text-gray-500">Choice of four main dishes: Chicken, Lamb, Fish or Prawn</span></li>
-        <li>A elegir un plato de verduras<br><span class="text-sm text-gray-500">Choice of one vegetable dish</span></li>
-        <li>A elegir dos Naan<br><span class="text-sm text-gray-500">Choice of two naan</span></li>
-        <li>A elegir dos de arroz<br><span class="text-sm text-gray-500">Choice of two rice</span></li>
-        <li>Dos botellas de vino de la casa o cuatro pintas de cerveza<br><span class="text-sm text-gray-500">Two bottles of house wine or four pints of beer</span></li>
-      </ul>
+
+    <!-- Menú para 2 -->
+    <div id="menu2" class="group-menu">
+      <h2 class="text-2xl font-bold uppercase mb-1">Menú Taj Mahal para 2</h2>
+      <p class="italic text-sm text-gray-500 mb-4">Taj Mahal Menu for 2</p>
+      <p class="text-gray-700 mb-4 italic">Una selección de nuestros mejores platos para compartir<br><span class="text-sm text-gray-500">A selection of our best dishes to share</span></p>
+      <p><strong>Entrantes:</strong> 2 Samosas, Pakoras variadas<br><span class="text-sm text-gray-500">Starters: 2 Samosas, assorted Pakoras</span></p>
+      <p><strong>Principales:</strong> Butter Chicken, Lamb Rogan Josh, Arroz Basmati y Naan<br><span class="text-sm text-gray-500">Mains: Butter Chicken, Lamb Rogan Josh, Basmati Rice and Naan</span></p>
+      <p><strong>Bebida:</strong> 1 botella de vino o 2 cervezas<br><span class="text-sm text-gray-500">Drink: 1 bottle of wine or 2 beers</span></p>
+      <p class="font-bold mt-4">42,00€</p>
     </div>
-    <!-- Menú para 6 personas -->
-    <div>
-      <h2 class="text-2xl font-bold uppercase">MENÚ PARA 6 PERSONAS <span class="text-lg font-normal">125,00€</span><br><span class="text-base italic font-medium text-gray-600">MENU FOR 6 PEOPLE</span></h2>
-      <ul class="mt-4 space-y-1 text-left list-disc list-inside">
-        <li>Seis Papadoms<br><span class="text-sm text-gray-500">Six Papadoms</span></li>
-        <li>Seis piezas de Seekh Kebab de pollo, seis de Pollo Tikka<br><span class="text-sm text-gray-500">Six pieces of Chicken Seekh Kebab, six Chicken Tikka</span></li>
-        <li>Seis piezas de Cebolla Bhaji, seis de queso Paneer Pakoba<br><span class="text-sm text-gray-500">Six Onion Bhaji, six Paneer Pakoba cheese</span></li>
-        <li>A elegir seis platos principales: Pollo, Cordero, Pescado o Gamba<br><span class="text-sm text-gray-500">Choice of six main dishes: Chicken, Lamb, Fish or Prawn</span></li>
-        <li>A elegir un plato de verduras<br><span class="text-sm text-gray-500">Choice of one vegetable dish</span></li>
-        <li>A elegir tres Naan<br><span class="text-sm text-gray-500">Choice of three naan</span></li>
-        <li>A elegir tres de arroz<br><span class="text-sm text-gray-500">Choice of three rice</span></li>
-        <li>Tres botellas de vino de la casa o seis pintas de cerveza<br><span class="text-sm text-gray-500">Three bottles of house wine or six pints of beer</span></li>
-      </ul>
+
+    <!-- Menú para 4 -->
+    <div id="menu4" class="group-menu hidden">
+      <h2 class="text-2xl font-bold uppercase mb-1">Menú Maharajá para 4</h2>
+      <p class="italic text-sm text-gray-500 mb-4">Maharaja Menu for 4</p>
+      <p class="text-gray-700 mb-4 italic">Una experiencia completa con variedad de entrantes y principales<br><span class="text-sm text-gray-500">A full experience with a variety of starters and mains</span></p>
+      <p><strong>Entrantes:</strong> Samosas, Pakoras, Onion Bhaji, Pollo Tikka<br><span class="text-sm text-gray-500">Starters: Samosas, Pakoras, Onion Bhaji, Chicken Tikka</span></p>
+      <p><strong>Principales:</strong> 4 platos a elegir: Pollo, Cordero, Pescado o Gamba + 2 arroz + 2 naan<br><span class="text-sm text-gray-500">Mains: Choice of 4 mains: Chicken, Lamb, Fish or Prawn + 2 rice + 2 naan</span></p>
+      <p><strong>Bebida:</strong> 2 botellas de vino o 4 cervezas<br><span class="text-sm text-gray-500">Drink: 2 bottles of wine or 4 beers</span></p>
+      <p class="font-bold mt-4">85,00€</p>
     </div>
+
+    <!-- Menú para 6 -->
+    <div id="menu6" class="group-menu hidden">
+      <h2 class="text-2xl font-bold uppercase mb-1">Menú Bollywood para 6</h2>
+      <p class="italic text-sm text-gray-500 mb-4">Bollywood Menu for 6</p>
+      <p class="text-gray-700 mb-4 italic">Un festín completo para disfrutar en grupo<br><span class="text-sm text-gray-500">A full feast to enjoy as a group</span></p>
+      <p><strong>Entrantes:</strong> Samosas, Pakoras, Cebolla Bhaji, Pollo Tikka, Seekh Kebab<br><span class="text-sm text-gray-500">Starters: Samosas, Pakoras, Onion Bhaji, Chicken Tikka, Seekh Kebab</span></p>
+      <p><strong>Principales:</strong> 6 platos a elegir: Pollo, Cordero, Pescado o Gamba + 3 arroz + 3 naan<br><span class="text-sm text-gray-500">Mains: Choice of 6 mains: Chicken, Lamb, Fish or Prawn + 3 rice + 3 naan</span></p>
+      <p><strong>Bebida:</strong> 3 botellas de vino o 6 cervezas<br><span class="text-sm text-gray-500">Drink: 3 bottles of wine or 6 beers</span></p>
+      <p class="font-bold mt-4">125,00€</p>
+    </div>
+
   </div>
 </div>
+
 <li class="flex items-start">
 <span class="font-semibold mr-2">Entrantes:</span>
 <span>2 Samosas, Pakoras variadas y Chicken Tikka</span>
@@ -1083,6 +1085,12 @@ document.getElementById(contentId).classList.add('active');
       }
     });
   });
+</script>
+  <script>
+  function mostrarMenu(id) {
+    document.querySelectorAll('.group-menu').forEach(div => div.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+  }
 </script>
 </body>
 </html>
