@@ -161,6 +161,10 @@ transform: rotate(-45deg) translate(7px, -7px);
 }
 </style>
 </head>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
 <body class="bg-white">
 <!-- Header con arco de templo -->
 <header class="fixed top-0 left-0 w-full z-50">
@@ -562,21 +566,20 @@ transform: rotate(-45deg) translate(7px, -7px);
         <p>Nuestra cocina combina ingredientes frescos y especias importadas para ofrecerte una experiencia que te transporta a la esencia de la India.</p>
       </div>
     </div>
-    <!-- Carrusel de imágenes -->
-    <div class="mt-12 relative overflow-hidden rounded-lg shadow-lg">
-      <div id="carousel" class="relative w-full h-64 md:h-80">
-        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-100">
-          <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice&width=600&height=400&seq=food1" class="w-full h-full object-cover rounded-lg" />
-        </div>
-        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce&width=600&height=400&seq=food2" class="w-full h-full object-cover rounded-lg" />
-        </div>
-        <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0">
-          <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill&width=600&height=400&seq=food3" class="w-full h-full object-cover rounded-lg" />
-        </div>
-      </div>
+   <!-- Carrusel de imágenes con Swiper -->
+<div class="swiper w-full max-w-2xl mx-auto mt-12 rounded-lg overflow-hidden shadow-lg">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice&width=600&height=400&seq=food1" class="w-full h-64 object-cover" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce&width=600&height=400&seq=food2" class="w-full h-64 object-cover" />
+    </div>
+    <div class="swiper-slide">
+      <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill&width=600&height=400&seq=food3" class="w-full h-64 object-cover" />
     </div>
   </div>
+</div>
 </section>
 <!-- Contacto -->
 <section id="contacto" class="py-20 bg-gradient-to-b from-gray-50 to-white relative">
@@ -1004,6 +1007,20 @@ document.getElementById(contentId).classList.add('active');
       current = (current + 1) % slides.length;
       showSlide(current);
     }, 3000); // Cambia cada 3 segundos
+  });
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  new Swiper(".swiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true
+    }
   });
 </script>
 </body>
