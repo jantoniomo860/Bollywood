@@ -290,49 +290,52 @@ transform: rotate(-45deg) translate(7px, -7px);
 <label for="tab-naan" class="font-lobster text-lg !rounded-button">Pan Naan</label>
 </div>
 <!-- Contenido de las tabs -->
-<div class="tab-content active" id="content-diario">
-<div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
-<h3 class="font-lobster text-3xl text-primary mb-6 text-center">Menú Diario</h3>
-<p class="text-center text-gray-700 mb-8">Disponible de lunes a viernes de 13:00 a 16:00h</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
-<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Menú Ejecutivo</h4>
-<p class="text-gray-600 italic mb-4">Incluye entrante, plato principal, postre y bebida</p>
-<ul class="space-y-2">
-<li class="flex justify-between">
-<span>Opción Vegetariana</span>
-<span class="font-semibold text-primary">14,95 €</span>
-</li>
-<li class="flex justify-between">
-<span>Opción con Pollo</span>
-<span class="font-semibold text-primary">16,95 €</span>
-</li>
-<li class="flex justify-between">
-<span>Opción con Cordero</span>
-<span class="font-semibold text-primary">18,95 €</span>
-</li>
-</ul>
-</div>
-<div class="menu-item transition-all duration-300 bg-white rounded-lg p-6 border border-gray-100 shadow-md hover:border-secondary">
-<h4 class="font-lobster text-2xl text-[#4B0082] mb-2">Menú Bollywood</h4>
-<p class="text-gray-600 italic mb-4">Incluye 2 entrantes, plato principal, naan, postre y bebida</p>
-<ul class="space-y-2">
-<li class="flex justify-between">
-<span>Opción Vegetariana</span>
-<span class="font-semibold text-primary">18,95 €</span>
-</li>
-<li class="flex justify-between">
-<span>Opción con Pollo</span>
-<span class="font-semibold text-primary">21,95 €</span>
-</li>
-<li class="flex justify-between">
-<span>Opción con Cordero</span>
-<span class="font-semibold text-primary">24,95 €</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
+<!-- Menú Diario Bollywood -->
+<div id="daily-menu" class="menu-section active">
+  <h3 class="text-3xl font-lobster text-center text-[#FF1493] mb-6">Menú Diario – 15,95 €</h3>
+  <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-md">
+    <p class="text-center text-[#4B0082] text-lg font-semibold mb-2 tracking-wide">DE 13H A 16H</p>
+    <hr class="border-t border-gray-400 mb-6 w-24 mx-auto" />
+    <p class="text-gray-700 text-center mb-6">Papadoms con salsa</p>
+    <div class="space-y-6">
+      <!-- Entrantes -->
+      <div>
+        <h4 class="text-lg font-bold text-[#4B0082] text-center mb-2">Entrantes a elegir</h4>
+        <ul class="text-center text-gray-800 space-y-1">
+          <li>Ensalada Mixta</li>
+          <li>Cebolla Bhaji</li>
+          <li>Verduras Pakora</li>
+          <li>Pollo Pakora</li>
+          <li>Pollo Chat</li>
+          <li>Channa Chat</li>
+          <li>Pollo Tikka</li>
+        </ul>
+      </div>
+      <!-- Principal -->
+      <div>
+        <h4 class="text-lg font-bold text-[#4B0082] text-center mb-2">Plato Principal a elegir</h4>
+        <p class="text-center text-gray-800">Entre n.º 65 y n.º 82<br>Pollo – Cordero – Gamba – Pescado<br>o toda la gama vegetal</p>
+      </div>
+      <!-- Arroz / Pan -->
+      <div>
+        <h4 class="text-lg font-bold text-[#4B0082] text-center mb-2">Arroz o Pan</h4>
+        <ul class="text-center text-gray-800 space-y-1">
+          <li>Arroz cocido</li>
+          <li>Arroz Pilau</li>
+          <li>Tandoori Roti</li>
+          <li>Naah</li>
+          <li>Naan de Ajo</li>
+        </ul>
+      </div>
+      <!-- Bebida -->
+      <div>
+        <h4 class="text-lg font-bold text-[#4B0082] text-center mb-2">Bebida</h4>
+        <p class="text-center text-gray-800">Refresco / Copa de vino / Caña de cerveza</p>
+      </div>
+    </div>
+    <!-- Nota -->
+    <p class="text-xs text-center text-gray-500 mt-8 italic">*Plato caliente Tandoori “Sizzler” no incluido</p>
+  </div>
 </div>
 <div class="tab-content" id="content-grupos">
 <div class="bg-white rounded-lg shadow-lg p-6 border border-gray-200">
