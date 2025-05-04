@@ -566,24 +566,11 @@ transform: rotate(-45deg) translate(7px, -7px);
         <p>Nuestra cocina combina ingredientes frescos y especias importadas para ofrecerte una experiencia que te transporta a la esencia de la India.</p>
       </div>
     </div>
-<!-- Carrusel de imágenes con bordes -->
-<div class="relative w-full max-w-xs mx-auto md:max-w-md">
-  <div class="absolute -top-2 -left-2 w-full h-full border-2 border-secondary rounded pointer-events-none z-0"></div>
-
-  <div class="swiper w-full h-[300px] md:h-[400px] relative z-10 rounded overflow-hidden">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice&width=600&height=400&seq=food1" class="w-full h-full object-cover" />
-      </div>
-      <div class="swiper-slide">
-        <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce&width=600&height=400&seq=food2" class="w-full h-full object-cover" />
-      </div>
-      <div class="swiper-slide">
-        <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill&width=600&height=400&seq=food3" class="w-full h-full object-cover" />
-      </div>
-    </div>
-  </div>
-  <div class="absolute -bottom-2 -right-2 w-full h-full border-2 border-primary rounded pointer-events-none z-0"></div>
+<!-- Galería simple de 3 imágenes -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+  <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice&width=600&height=400&seq=food1" alt="Butter Chicken" class="w-full h-64 object-cover rounded-lg shadow-md">
+  <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce&width=600&height=400&seq=food2" alt="Samosas" class="w-full h-64 object-cover rounded-lg shadow-md">
+  <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill&width=600&height=400&seq=food3" alt="Tandoori Grill" class="w-full h-64 object-cover rounded-lg shadow-md">
 </div>
 </section>
 <!-- Contacto -->
