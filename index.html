@@ -554,12 +554,16 @@ transform: rotate(-45deg) translate(7px, -7px);
     <h2 class="font-lobster text-4xl md:text-5xl text-center text-[#4B0082] mb-10">Nuestra Historia</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
       <!-- Imagen reducida con marcos -->
-      <div class="relative w-full max-w-xs mx-auto md:max-w-md">
-        <div class="absolute -top-2 -left-2 w-full h-full border-2 border-secondary rounded pointer-events-none"></div>
-        <img src="Bollywood.png" alt="Nuestro equipo"
-          class="w-full object-cover rounded shadow-lg relative z-10 max-h-[300px] md:max-h-[400px]" loading="lazy" />
-        <div class="absolute -bottom-2 -right-2 w-full h-full border-2 border-primary rounded pointer-events-none"></div>
-      </div>
+ <!-- Video en lugar de imagen en Sobre Nosotros -->
+<div class="relative w-full max-w-xs mx-auto md:max-w-md">
+  <div class="absolute -top-2 -left-2 w-full h-full border-2 border-secondary rounded pointer-events-none"></div>
+  <video autoplay loop muted playsinline
+    class="w-full object-cover rounded shadow-lg relative z-10 max-h-[300px] md:max-h-[400px]">
+    <source src="Clip.mp4" type="video/mp4">
+    Tu navegador no soporta el elemento de video.
+  </video>
+  <div class="absolute -bottom-2 -right-2 w-full h-full border-2 border-primary rounded pointer-events-none"></div>
+</div>
       <!-- Texto -->
       <div class="text-sm md:text-base leading-relaxed space-y-4 text-gray-800">
         <p>Desde 2010, <span class="font-semibold text-[#4B0082]">Restaurante Bollywood</span> ofrece auténticos sabores de la India en Águilas. Cada plato refleja la pasión del Chef y las recetas tradicionales.</p>
@@ -569,16 +573,16 @@ transform: rotate(-45deg) translate(7px, -7px);
 <!-- Galería simple de 3 imágenes -->
 <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
   <div>
-    <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520butter%2520chicken%2520curry%2520with%2520naan%2520bread%2520and%2520rice&width=600&height=400&seq=food1" class="w-full h-64 object-cover rounded-lg shadow-md">
-    <p class="mt-2 font-semibold text-sm text-gray-700">Butter Chicken</p>
+    <img src="Curry.png" alt="Curry" class="w-full h-64 object-cover rounded-lg shadow-md" />
+    <p class="mt-2 font-semibold text-sm text-gray-700">Curry</p>
   </div>
   <div>
-    <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520samosas%2520with%2520chutney%2520dipping%2520sauce&width=600&height=400&seq=food2" class="w-full h-64 object-cover rounded-lg shadow-md">
-    <p class="mt-2 font-semibold text-sm text-gray-700">Samosas</p>
+    <img src="Naan.png" alt="Naan" class="w-full h-64 object-cover rounded-lg shadow-md" />
+    <p class="mt-2 font-semibold text-sm text-gray-700">Pan Naan</p>
   </div>
   <div>
-    <img src="https://readdy.ai/api/search-image?query=elegant%2520plated%2520tandoori%2520mixed%2520grill&width=600&height=400&seq=food3" class="w-full h-64 object-cover rounded-lg shadow-md">
-    <p class="mt-2 font-semibold text-sm text-gray-700">Tandoori Grill</p>
+    <img src="tikkamasal.png" alt="Tikka Masala" class="w-full h-64 object-cover rounded-lg shadow-md" />
+    <p class="mt-2 font-semibold text-sm text-gray-700">Tikka Masala</p>
   </div>
 </div>
 </section>
